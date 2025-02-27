@@ -85,7 +85,7 @@
         let loadingSection = document.getElementById("loading-section");
         let textContainer = document.getElementById("hackingText");
 
-        function createLoadingBar(message) {
+        function createLoadingBar(message, index) {
             let container = document.createElement("div");
             container.className = "loading-container";
 
@@ -114,7 +114,7 @@
 
         function startHackingEffect() {
             hackingMessages.forEach((msg, index) => {
-                setTimeout(() => createLoadingBar(msg), index * 1000);
+                setTimeout(() => createLoadingBar(msg, index), index * 1000);
             });
 
             let logIndex = 0;
@@ -125,7 +125,8 @@
                     setTimeout(addLogMessage, 500);
                 }
             }
-            addLogMessage();
+
+            addLogMessage(); // Start text logs immediately
         }
 
         startHackingEffect();
