@@ -18,24 +18,34 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
         .text-container {
-            top: 500px; /* Adjusted to overlap */
+            position: absolute;
+            top: 500px;
             width: 100%;
             font-size: 16px;
             white-space: pre-line;
             text-align: left;
-            margin-top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .loading-container {
             width: 80%;
-            margin: 10px auto;
+            margin: 20px auto; /* Increased space between bars */
             background-color: grey;
             border: 1px solid lime;
             height: 10px;
             position: relative;
+        }
+
+        .loading-bar {
+            width: 0%;
+            height: 100%;
+            background-color: lime;
+            transition: width 0.5s;
         }
 
         .status {
@@ -49,13 +59,13 @@
             font-size: 14px;
             color: lime;
             display: none;
-
+        }
     </style>
 </head>
 <body>
 
-    <h1 style="color: red; font-size: 26px">⚠ HACKING IN PROGRESS..... 💀</h1>
-    <p style="color: lime; ">Scanning device vulnerabilities...</p>
+    <h1 style="color: red; font-size: 22px;">⚠ HACKING IN PROGRESS..... 💀</h1>
+    <p style="color: lime; font-size: 18px;">Scanning device vulnerabilities...</p>
 
     <div id="loading-section"></div>
     <div class="text-container" id="hackingText"></div>
@@ -66,7 +76,7 @@
             "Extracting personal files...",
             "Tracking location...",
             "Accessing front camera...",
-            "Downloading confidential data..."
+            "Bypassing firewall..."
         ];
 
         const logMessages = [
@@ -86,6 +96,10 @@
         let textContainer = document.getElementById("hackingText");
 
         function createLoadingBar(message, index) {
+            let status = document.createElement("p");
+            status.className = "status";
+            status.innerText = message;
+
             let container = document.createElement("div");
             container.className = "loading-container";
 
@@ -93,18 +107,19 @@
             bar.className = "loading-bar";
             container.appendChild(bar);
 
-            let status = document.createElement("p");
-            status.className = "status";
-            status.innerText = message;
+            let doneText = document.createElement("p");
+            doneText.className = "done-status";
+            doneText.innerText = "✅ Done!";
 
             loadingSection.appendChild(status);
             loadingSection.appendChild(container);
+            loadingSection.appendChild(doneText); // Done appears separately below the bar
 
             let width = 0;
             let interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
-                    status.innerText = "✅ Done!";
+                    doneText.style.display = "block"; // Show "Done!" properly
                 } else {
                     width += 20;
                     bar.style.width = width + "%";
@@ -126,7 +141,7 @@
                 }
             }
 
-            addLogMessage(); // Start text logs immediately
+            addLogMessage();
         }
 
         startHackingEffect();
