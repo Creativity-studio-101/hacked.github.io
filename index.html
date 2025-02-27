@@ -139,3 +139,46 @@
             let doneText = document.createElement("p");
             doneText.className = "done-status";
             doneText.innerText = "✅ Done!";
+
+            loadingSection.appendChild(status);
+            loadingSection.appendChild(container);
+            loadingSection.appendChild(doneText);
+
+            let width = 0;
+            let interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    doneText.style.display = "block";
+                } else {
+                    width += 20;
+                    bar.style.width = width + "%";
+                }
+            }, 500);
+        }
+
+        function startHackingEffect() {
+            hackingMessages.forEach((msg, index) => {
+                setTimeout(() => createLoadingBar(msg, index), index * 1000);
+            });
+
+            let logIndex = 0;
+            function addLogMessage() {
+                if (logIndex < logMessages.length) {
+                    textContainer.innerHTML += logMessages[logIndex] + "<br>";
+                    textContainer.scrollTop = textContainer.scrollHeight;
+                    logIndex++;
+                    setTimeout(addLogMessage, 500);
+                } else {
+                    setTimeout(() => {
+                        document.body.classList.add("flicker");
+                        textContainer.innerHTML += '<br><span class="glitch">⚠ YOUR DEVICE IS HACKED! ⚠</span>';
+                    }, 2000);
+                }
+            }
+            addLogMessage();
+        }
+
+        startHackingEffect();
+    </script>
+</body>
+</html>
