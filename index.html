@@ -34,7 +34,7 @@
 
         .loading-container {
             width: 80%;
-            margin: 3px auto; /* Increased space between bars */
+            margin: 3px auto;
             background-color: grey;
             border: 1px solid lime;
             height: 10px;
@@ -60,89 +60,57 @@
             color: lime;
             display: none;
         }
+
+        @keyframes glitch {
+            0% { transform: translate(2px, -2px); }
+            25% { transform: translate(-2px, 2px); }
+            50% { transform: translate(2px, 2px); }
+            75% { transform: translate(-2px, -2px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .glitch {
+            display: inline-block;
+            animation: glitch 0.1s infinite;
+        }
     </style>
 </head>
 <body>
 
-    <h1 style="color: red; font-size: 22px;">⚠ HACKING IN PROGRESS..... 💀</h1>
-    <p style="color: lime; font-size: 18px;">Scanning device vulnerabilities...</p>
+    <h1 class="glitch">⚠ HACKING IN PROGRESS..... 💀</h1>
+    <p style="color: lime; font-size: 18px;" class="glitch">Scanning device vulnerabilities...</p>
 
     <div id="loading-section"></div>
     <div class="text-container" id="hackingText"></div>
+
+    <audio id="typingSound" src="https://www.fesliyanstudios.com/play-mp3/4382" preload="auto"></audio>
 
     <script>
         const hackingMessages = [
             "Cracking password...",
             "Extracting personal files...",
             "Tracking location...",
-            "Cracking password...",
-            "Extracting personal files...",
-            "Tracking location...",
             "Accessing front camera...",
             "Downloading confidential data..."
-            
         ];
 
         const logMessages = [
             "[Initializing System Breach...]",
             "[Bypassing Firewall...]",
-            "[Cracking Password: *********]",
             "[Decrypting Secure Files...]",
             "[Accessing User Data...]",
             "[Tracking IP Address...]",
-            "[Camera Hacked - Live Feed Activated]",
-            "[Fake Bank Transaction Initiated...]",
-            "[Government Database Access Granted...]",
-            "[Cloning Security Tokens...]"
-            "[Decrypting Secure Files...]",
-            "[Fake Bank Transaction Initiated...]",
-            "[Government Database Access Granted...]",
-            "[Cloning Security Tokens...]",
             "[Injecting Malware into System...]",
             "[Gaining Admin Privileges...]",
-            "[Spoofing MAC Address...]",
-            "[Intercepting Network Traffic...]",
-            "[Extracting Encrypted Messages...]",
-            "[Bypassing 2FA Authentication...]",
-            "[Deploying Ransomware Payload...]",
-            "[Uploading Spyware to Cloud...]",
-            "[Stealing Cryptocurrency Wallets...]",
-            "[Accessing Personal Emails...]",
             "[Hacking Social Media Accounts...]",
-            "[Modifying Security Logs...]",
-            "[Activating Remote Control Access...]",
-            "[Disabling Antivirus Protection...]",
-            "[Erasing Digital Footprints...]",
-            "[Cloning Biometric Data...]",
-            "[Injecting Keylogger...]",
             "[Compromising Secure VPN Tunnel...]",
-            "[Escalating Privileges to Root Access...]",
-            "[Creating Backdoor for Future Access...]",
-            "[Hijacking DNS Configuration...]",
-            "[Redirecting Web Traffic to Phishing Sites...]",
-            "[Stealing Banking Credentials...]",
-            "[Decrypting Secure Messaging Apps...]",
-            "[Accessing Dark Web Marketplaces...]",
-            "[Overloading Server with DDoS Attack...]",
-            "[Tampering with Surveillance Footage...]",
-            "[Brute-Forcing Encryption Keys...]",
-            "[Extracting Private Photos and Videos...]",
-            "[Unlocking Secure Vault Files...]",
-            "[Cracking Bitcoin Private Keys...]",
-            "[Manipulating Stock Trading Accounts...]",
-            "[Generating Fake IDs and Passports...]",
-            "[Installing Hidden Rootkit...]",
-            "[Intercepting Military Communications...]",
-            "[Breaking Into Classified Government Files...]",
-            "[Compromising Satellite Networks...]",
-            "[Gaining Control of IoT Devices...]",
-            "[Triggering Fake Emergency Alerts...]",
             "[Finalizing Cyber Attack Execution...]",
             "[Mission Complete - System Fully Compromised!]"
         ];
 
         let loadingSection = document.getElementById("loading-section");
         let textContainer = document.getElementById("hackingText");
+        let typingSound = document.getElementById("typingSound");
 
         function createLoadingBar(message, index) {
             let status = document.createElement("p");
@@ -162,18 +130,33 @@
 
             loadingSection.appendChild(status);
             loadingSection.appendChild(container);
-            loadingSection.appendChild(doneText); // Done appears separately below the bar
+            loadingSection.appendChild(doneText);
 
             let width = 0;
             let interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
-                    doneText.style.display = "block"; // Show "Done!" properly
+                    doneText.style.display = "block";
                 } else {
                     width += 20;
                     bar.style.width = width + "%";
                 }
             }, 500);
+        }
+
+        function typeMessage(message, index, callback) {
+            let i = 0;
+            let interval = setInterval(() => {
+                if (i < message.length) {
+                    textContainer.innerHTML += message[i];
+                    i++;
+                    typingSound.play();
+                } else {
+                    clearInterval(interval);
+                    textContainer.innerHTML += "<br>";
+                    if (callback) callback();
+                }
+            }, 50);
         }
 
         function startHackingEffect() {
@@ -184,17 +167,16 @@
             let logIndex = 0;
             function addLogMessage() {
                 if (logIndex < logMessages.length) {
-                    textContainer.innerHTML += logMessages[logIndex] + "<br>";
-                    logIndex++;
-                    setTimeout(addLogMessage, 500);
+                    typeMessage(logMessages[logIndex], logIndex, () => {
+                        logIndex++;
+                        setTimeout(addLogMessage, 500);
+                    });
                 }
             }
-
             addLogMessage();
         }
 
         startHackingEffect();
     </script>
-
 </body>
 </html>
