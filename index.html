@@ -111,3 +111,167 @@
 
 </body>
 </html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacked!</title>
+    <style>
+        body {
+            
+            color: red;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .hacking-screen {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .text-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            font-size: 16px;
+            white-space: pre-line;
+            text-align: left; /* Align text to the left */
+        }
+
+        .loading-bar {
+            width: 80%;
+            height: 20px;
+            background-color: grey;
+            margin: 5px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0%;
+            background-color: lime;
+        }
+
+        .alert {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+            opacity: 0;
+            animation: alertBlink 2s infinite alternate;
+        }
+
+        @keyframes alertBlink {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="hacking-screen">
+        <div class="text-container" id="hackingText"></div>
+    </div>
+
+    <div id="loadingBars"></div>
+
+    <script>
+        const hackingMessages = [
+            "[Initializing System Breach...]",
+            "[Bypassing Firewall...]",
+            "[Cracking Password: *********]",
+            "[Decrypting Secure Files...]",
+            "[Accessing User Data...]",
+            "[Injecting Malware...]",
+            "[Tracking IP Address...]",
+            "[Camera Hacked - Live Feed Activated]",
+            "[Downloading Confidential Data...]",
+            "[Overriding Security Protocols...]",
+            "[Fake Bank Transaction Initiated...]",
+            "[Government Database Access Granted...]",
+            "[Cloning Security Tokens...]",
+            "[Tracing Location...]",
+            "[Hijacking Secure Connections...]"
+        ];
+
+        let textContainer = document.getElementById("hackingText");
+        let alertMessage = document.getElementById("alertMessage");
+        let textIndex = 0;
+
+        function typeMessage(message, index, callback) {
+            if (index < message.length) {
+                textContainer.innerHTML += message.charAt(index);
+                setTimeout(() => typeMessage(message, index + 1, callback), 20);
+            } else {
+                textContainer.innerHTML += "<br>"; // Move to the next line
+                callback();
+            }
+        }
+
+        function startHackingEffect() {
+            if (textIndex < hackingMessages.length) {
+                typeMessage(hackingMessages[textIndex], 0, () => {
+                    textIndex++;
+                    setTimeout(startHackingEffect, 350); // Delay before next line
+                });
+            } else {
+                setTimeout(() => {
+                    startLoadingBars();
+                }, 1000);
+            }
+        }
+
+        function createLoadingBar() {
+            let barContainer = document.createElement("div");
+            barContainer.className = "loading-bar";
+            let progress = document.createElement("div");
+            progress.className = "progress";
+            barContainer.appendChild(progress);
+            document.getElementById("loadingBars").appendChild(barContainer);
+            return progress;
+        }
+
+        function startLoadingBars() {
+            let bars = [];
+            for (let i = 0; i < 5; i++) {
+                bars.push(createLoadingBar());
+            }
+
+            function fillBar(index) {
+                if (index >= bars.length) {
+                    alertMessage.style.display = "block"; // Show final hacked message
+                    return;
+                }
+
+                let width = 0;
+                let interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        bars[index].style.backgroundColor = "red"; // Turn red after full
+                        setTimeout(() => fillBar(index + 1), 500); // Start next bar
+                    } else {
+                        width += 1;
+                        bars[index].style.width = width + "%";
+                    }
+                }, 50);
+            }
+
+            fillBar(0);
+        }
+
+        startHackingEffect();
+    </script>
+
+</body>
+</html>
