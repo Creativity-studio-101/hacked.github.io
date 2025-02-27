@@ -95,51 +95,32 @@
     <div id="loading-section"></div>
     <div class="text-container" id="hackingText"></div>
 
-    <audio id="typingSound" src="https://www.fesliyanstudios.com/play-mp3/4382" preload="auto"></audio>
-
     <script>
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+
+        window.onbeforeunload = function () {
+            return "Are you sure you want to leave?";
+        };
+
+        window.onpopstate = function () {
+            location.replace(location.href);
+        };
+
+        document.documentElement.requestFullscreen();
+
         const hackingMessages = [
             "Cracking password...",
             "Extracting personal files...",
-            "Tracking location...",
-            "Downloading confidential data..."
+            "Tracking location..."
         ];
 
-        const logMessages = [
-            "[Initializing System Breach...]",
-            "[Bypassing Firewall...]",
-            "[Decrypting Secure Files...]",
-            "[Accessing User Data...]",
-            "[Tracking IP Address...]",
-            "[Injecting Malware into System...]",
-            "[Gaining Admin Privileges...]",
-            "[Hacking Social Media Accounts...]",
-            "[Compromising Secure VPN Tunnel...]",
-            "[Finalizing Cyber Attack Execution...]",
-            "[Mission Complete - System Fully Compromised!]",
-            "[Cloning Security Tokens...]",
-            "[Disabling Antivirus Protection...]",
-            "[Erasing Digital Footprints...]",
-            "[Hijacking DNS Configuration...]",
-            "[Stealing Banking Credentials...]",
-            "[Decrypting Secure Messaging Apps...]",
-            "[Overloading Server with DDoS Attack...]",
-            "[Tampering with Surveillance Footage...]",
-            "[Brute-Forcing Encryption Keys...]",
-            "[Extracting Private Photos and Videos...]",
-            "[Unlocking Secure Vault Files...]",
-            "[Manipulating Stock Trading Accounts...]",
-            "[Generating Fake IDs and Passports...]",
-            "[Installing Hidden Rootkit...]",
-            "[Intercepting Military Communications...]",
-            "[Breaking Into Classified Government Files...]",
-            "[Compromising Satellite Networks...]",
-            "[Triggering Fake Emergency Alerts...]"
-        ];
+        const logMessages = Array(50).fill(null).map((_, i) => `[Hacking Process Step ${i + 1}...]`);
 
         let loadingSection = document.getElementById("loading-section");
         let textContainer = document.getElementById("hackingText");
-        let typingSound = document.getElementById("typingSound");
 
         function createLoadingBar(message, index) {
             let status = document.createElement("p");
