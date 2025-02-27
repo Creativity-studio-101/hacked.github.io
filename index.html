@@ -32,18 +32,10 @@
             transform: translateX(-50%);
         }
 
-       body {
-            
-            color: lime;
-            font-family: 'Courier New', monospace;
-            text-align: center;
-            padding: 1px;
-        }
-
         .loading-container {
             width: 80%;
             margin: 10px auto;
-            background-color: #333;
+            background-color: grey;
             border: 1px solid lime;
             height: 10px;
             position: relative;
@@ -57,8 +49,20 @@
         }
 
         .status {
-            margin-top: 3px;
-            font-size: 10px;
+            font-size: 14px;
+            color: red;
+            position: relative;
+            top: -5px; /* Adjusted to be above the bar */
+        }
+
+        .done-status {
+            font-size: 14px;
+            color: lime;
+            display: none;
+            position: absolute; /* Changed from relative */
+            top: 15px; /* Moves "Done!" below the bar */
+            left: 50%;
+            transform: translateX(-50%);
         }
 
     </style>
