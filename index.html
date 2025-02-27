@@ -30,6 +30,8 @@
             text-align: left;
             left: 50%;
             transform: translateX(-50%);
+            max-height: 50vh;
+            overflow: hidden;
         }
 
         .loading-container {
@@ -73,6 +75,16 @@
             display: inline-block;
             animation: glitch 0.1s infinite;
         }
+
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .flicker {
+            animation: flicker 0.2s infinite;
+        }
     </style>
 </head>
 <body>
@@ -106,12 +118,6 @@
             "[Compromising Secure VPN Tunnel...]",
             "[Finalizing Cyber Attack Execution...]",
             "[Mission Complete - System Fully Compromised!]"
-            "[Initializing System Breach...]",
-            "[Bypassing Firewall...]",
-            "[Cracking Password: *********]",
-            "[Decrypting Secure Files...]",
-            "[Accessing User Data...]",
-        
         ];
 
         let loadingSection = document.getElementById("loading-section");
@@ -133,56 +139,3 @@
             let doneText = document.createElement("p");
             doneText.className = "done-status";
             doneText.innerText = "✅ Done!";
-
-            loadingSection.appendChild(status);
-            loadingSection.appendChild(container);
-            loadingSection.appendChild(doneText);
-
-            let width = 0;
-            let interval = setInterval(() => {
-                if (width >= 100) {
-                    clearInterval(interval);
-                    doneText.style.display = "block";
-                } else {
-                    width += 20;
-                    bar.style.width = width + "%";
-                }
-            }, 500);
-        }
-
-        function typeMessage(message, index, callback) {
-            let i = 0;
-            let interval = setInterval(() => {
-                if (i < message.length) {
-                    textContainer.innerHTML += message[i];
-                    i++;
-                    typingSound.play();
-                } else {
-                    clearInterval(interval);
-                    textContainer.innerHTML += "<br>";
-                    if (callback) callback();
-                }
-            }, 50);
-        }
-
-        function startHackingEffect() {
-            hackingMessages.forEach((msg, index) => {
-                setTimeout(() => createLoadingBar(msg, index), index * 1000);
-            });
-
-            let logIndex = 0;
-            function addLogMessage() {
-                if (logIndex < logMessages.length) {
-                    typeMessage(logMessages[logIndex], logIndex, () => {
-                        logIndex++;
-                        setTimeout(addLogMessage, 500);
-                    });
-                }
-            }
-            addLogMessage();
-        }
-
-        startHackingEffect();
-    </script>
-</body>
-</html>
