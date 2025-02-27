@@ -3,22 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HACKING...</title>
+    <title>Hacked!</title>
     <style>
         body {
             background-color: black;
             color: red;
             font-family: 'Courier New', monospace;
-            text-align: center;
+            overflow: hidden;
             padding: 20px;
+            text-align: center;
+        }
+
+        .hacking-screen {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .text-container {
+            width: 100%;
+            font-size: 16px;
+            white-space: pre-line;
+            text-align: left; /* Align text to the left */
+            margin-top: 20px;
         }
 
         .loading-container {
             width: 80%;
             margin: 10px auto;
             background-color: grey;
-            border: 2px solid lime;
-            height: 15px;
+            border: 1px solid lime;
+            height: 10px;
             position: relative;
         }
 
@@ -32,105 +47,95 @@
         .status {
             font-size: 14px;
             color: lime;
-            font-weight: bold;
+            text-align: center;
         }
 
-        .hacking-text {
-            white-space: pre-line;
-            text-align: left;
-            margin: 20px auto;
-            width: 80%;
-            color: red;
-        }
     </style>
 </head>
 <body>
-    <h1 style="color: red; font-size: 24px">⚠ HACKING IN PROGRESS..... 💀</h1>
-    <p style="color: green; font-size: 18px;">Scanning device vulnerabilities...</p>
-    
+
+    <h1 style="color: red; font-size: 20px">⚠ HACKING IN PROGRESS..... 💀</h1>
+    <p style="color: lime;">Scanning device vulnerabilities...</p>
+
     <div id="loading-section"></div>
-    <div class="hacking-text" id="hackingText"></div>
-    
+
+    <div class="text-container" id="hackingText"></div>
+
     <script>
-        const tasks = [
+        const hackingMessages = [
             "Cracking password...",
             "Extracting personal files...",
             "Tracking location...",
             "Accessing front camera...",
-            "Bypassing firewall..."
+            "Downloading confidential data..."
         ];
-        
-        const hackingMessages = [
-            "[Initializing System Breach...]",
-            "[Bypassing Firewall...]",
-            "[Cracking Password: *********]",
-            "[Decrypting Secure Files...]",
-            "[Accessing User Data...]",
-            "[Tracking IP Address...]",
-            "[Camera Hacked - Live Feed Activated]",
-            "[Downloading Confidential Data...]",
-            "[Overriding Security Protocols...]",
-            "[Fake Bank Transaction Initiated...]"
-        ];
-        
+
         let loadingSection = document.getElementById("loading-section");
-        let hackingText = document.getElementById("hackingText");
-        let index = 0;
+        let textContainer = document.getElementById("hackingText");
 
-        function addLoadingTask(task) {
+        function createLoadingBar(message, index, callback) {
             let container = document.createElement("div");
-            let text = document.createElement("p");
-            let barContainer = document.createElement("div");
+            container.className = "loading-container";
+
             let bar = document.createElement("div");
-            let status = document.createElement("p");
-
-            text.innerText = task;
-            text.style.color = "red";
-            barContainer.className = "loading-container";
             bar.className = "loading-bar";
-            status.className = "status";
-            status.innerText = "0% Complete";
+            container.appendChild(bar);
 
-            barContainer.appendChild(bar);
-            container.appendChild(text);
-            container.appendChild(barContainer);
-            container.appendChild(status);
+            let status = document.createElement("p");
+            status.className = "status";
+            status.innerText = message;
+
+            loadingSection.appendChild(status);
             loadingSection.appendChild(container);
 
             let width = 0;
             let interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
-                    status.innerHTML = "✅ Done!";
+                    status.innerText = "✅ Done!";
+                    if (callback) setTimeout(callback, 500);
                 } else {
-                    width += Math.floor(Math.random() * 15) + 10;
-                    if (width > 100) width = 100;
+                    width += 20;
                     bar.style.width = width + "%";
-                    status.innerText = width + "% Complete";
                 }
-            }, 600);
+            }, 500);
         }
 
-        function addHackingMessages() {
-            let i = 0;
-            function typeMessage() {
-                if (i < hackingMessages.length) {
-                    hackingText.innerHTML += hackingMessages[i] + "<br>";
-                    i++;
-                    setTimeout(typeMessage, 400);
+        function displayHackingMessages(index = 0) {
+            if (index < hackingMessages.length) {
+                createLoadingBar(hackingMessages[index], index, () => displayHackingMessages(index + 1));
+            } else {
+                startScrollingText();
+            }
+        }
+
+        function startScrollingText() {
+            const logMessages = [
+                "[Initializing System Breach...]",
+                "[Bypassing Firewall...]",
+                "[Cracking Password: *********]",
+                "[Decrypting Secure Files...]",
+                "[Accessing User Data...]",
+                "[Tracking IP Address...]",
+                "[Camera Hacked - Live Feed Activated]",
+                "[Fake Bank Transaction Initiated...]",
+                "[Government Database Access Granted...]",
+                "[Cloning Security Tokens...]"
+            ];
+
+            let index = 0;
+            function addLogMessage() {
+                if (index < logMessages.length) {
+                    textContainer.innerHTML += logMessages[index] + "<br>";
+                    index++;
+                    setTimeout(addLogMessage, 500);
                 }
             }
-            typeMessage();
-        }
-        
-        function startHacking() {
-            tasks.forEach((task, i) => {
-                setTimeout(() => addLoadingTask(task), i * 2000);
-            });
-            setTimeout(addHackingMessages, 500);
+            addLogMessage();
         }
 
-        startHacking();
+        displayHackingMessages();
     </script>
+
 </body>
 </html>
