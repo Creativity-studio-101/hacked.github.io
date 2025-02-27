@@ -7,10 +7,33 @@
     <style>
         body {
             background-color: black;
-            color: lime;
+            color: red;
             font-family: 'Courier New', monospace;
-            text-align: center;
-            padding: 1px;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .hacking-screen {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .text-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            font-size: 16px;
+            white-space: pre-line;
+            text-align: left;
+        }
+
+        .green-text {
+            color: lime;
+            position: absolute;
+            left: 5px;
+            top: 0;
+            opacity: 0.8;
         }
 
         .loading-container {
@@ -30,7 +53,6 @@
         }
 
         .status {
-            margin-top: 3px;
             font-size: 12px;
         }
 
@@ -38,6 +60,7 @@
             color: red;
             font-size: 20px;
             margin-top: 20px;
+            text-align: center;
             animation: blink 1s infinite;
         }
 
@@ -45,146 +68,21 @@
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
-
     </style>
 </head>
 <body>
 
-    <h1 style="color: red; font-size: 22px">⚠ HACKING IN PROGRESS... 💀</h1>
+    <h1 style="color: red; text-align: center;">⚠ HACKING IN PROGRESS..... 💀</h1>
+    <p style="text-align: center; color: lime;">Scanning device vulnerabilities...</p>
 
-    <p>Scanning device vulnerabilities...</p>
-    <div class="loading-container"><div class="loading-bar" id="bar1"></div></div>
+    <div class="loading-container">
+        <div class="loading-bar" id="bar1"></div>
+    </div>
     <p class="status" id="status1">0% Complete</p>
-
-    <p>Cracking password...</p>
-    <div class="loading-container"><div class="loading-bar" id="bar2"></div></div>
-    <p class="status" id="status2">Waiting...</p>
-
-    <p>Extracting personal files...</p>
-    <div class="loading-container"><div class="loading-bar" id="bar3"></div></div>
-    <p class="status" id="status3">Waiting...</p>
-
-    <p>Tracking location...</p>
-    <div class="loading-container"><div class="loading-bar" id="bar4"></div></div>
-    <p class="status" id="status4">Waiting...</p>
-
-    <p>Accessing front camera...</p>
-    <div class="loading-container"><div class="loading-bar" id="bar5"></div></div>
-    <p class="status" id="status5">Waiting...</p>
-
-    <script>
-        function fakeHack(barId, statusId, delay, nextFunction) {
-            let width = 0;
-            let loadingBar = document.getElementById(barId);
-            let statusText = document.getElementById(statusId);
-
-            function updateBar() {
-                if (width < 100) {
-                    width += Math.floor(Math.random() * 10) + 10; // Random speed increase
-                    if (width > 100) width = 100;
-                    loadingBar.style.width = width + "%";
-                    statusText.innerText = width + "% Complete";
-
-                    setTimeout(updateBar, delay);
-                } else {
-                    statusText.innerText = "✅ Done!";
-                    if (nextFunction) setTimeout(nextFunction, 500); // Start next bar
-                }
-            }
-
-            updateBar();
-        }
-
-        // Start each step one after the other
-        fakeHack("bar1", "status1", 300, function() {
-            fakeHack("bar2", "status2", 400, function() {
-                fakeHack("bar3", "status3", 500, function() {
-                    fakeHack("bar4", "status4", 600, function() {
-                        fakeHack("bar5", "status5", 700, function() {
-                            document.body.innerHTML += "<h2 class='final-message'>🔥 SYSTEM HACKED! 🔥</h2>";
-                        });
-                    });
-                });
-            });
-        });
-    </script>
-
-</body>
-</html>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacked!</title>
-    <style>
-        body {
-            
-            color: red;
-            font-family: 'Courier New', monospace;
-            overflow: hidden;
-            padding: 20px;
-        }
-
-        .hacking-screen {
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .text-container {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            font-size: 16px;
-            white-space: pre-line;
-            text-align: left; /* Align text to the left */
-        }
-
-        .loading-bar {
-            width: 80%;
-            height: 20px;
-            background-color: grey;
-            margin: 5px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            width: 0%;
-            background-color: lime;
-        }
-
-        .alert {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: red;
-            opacity: 0;
-            animation: alertBlink 2s infinite alternate;
-        }
-
-        @keyframes alertBlink {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-    </style>
-</head>
-<body>
 
     <div class="hacking-screen">
         <div class="text-container" id="hackingText"></div>
     </div>
-
-    <div id="loadingBars"></div>
 
     <script>
         const hackingMessages = [
@@ -193,84 +91,62 @@
             "[Cracking Password: *********]",
             "[Decrypting Secure Files...]",
             "[Accessing User Data...]",
-            "[Injecting Malware...]",
+            "[Extracting Personal files...]",
             "[Tracking IP Address...]",
             "[Camera Hacked - Live Feed Activated]",
             "[Downloading Confidential Data...]",
             "[Overriding Security Protocols...]",
-            "[Fake Bank Transaction Initiated...]",
-            "[Government Database Access Granted...]",
-            "[Cloning Security Tokens...]",
-            "[Tracing Location...]",
-            "[Hijacking Secure Connections...]"
+            "[Fake Bank Transaction Initiated...]"
         ];
 
         let textContainer = document.getElementById("hackingText");
-        let alertMessage = document.getElementById("alertMessage");
         let textIndex = 0;
 
-        function typeMessage(message, index, callback) {
-            if (index < message.length) {
-                textContainer.innerHTML += message.charAt(index);
-                setTimeout(() => typeMessage(message, index + 1, callback), 20);
-            } else {
-                textContainer.innerHTML += "<br>"; // Move to the next line
-                callback();
-            }
-        }
-
-        function startHackingEffect() {
+        function addHackingText() {
             if (textIndex < hackingMessages.length) {
-                typeMessage(hackingMessages[textIndex], 0, () => {
-                    textIndex++;
-                    setTimeout(startHackingEffect, 350); // Delay before next line
-                });
-            } else {
-                setTimeout(() => {
-                    startLoadingBars();
-                }, 1000);
+                let redText = document.createElement("p");
+                let greenText = document.createElement("p");
+
+                redText.textContent = hackingMessages[textIndex];
+                greenText.textContent = hackingMessages[textIndex];
+
+                greenText.classList.add("green-text");
+                redText.style.position = "relative";
+
+                textContainer.appendChild(redText);
+                textContainer.appendChild(greenText);
+
+                textIndex++;
+                setTimeout(addHackingText, 500);
             }
         }
 
-        function createLoadingBar() {
-            let barContainer = document.createElement("div");
-            barContainer.className = "loading-bar";
-            let progress = document.createElement("div");
-            progress.className = "progress";
-            barContainer.appendChild(progress);
-            document.getElementById("loadingBars").appendChild(barContainer);
-            return progress;
-        }
+        function fakeLoading(barId, statusId, delay, nextFunction) {
+            let width = 0;
+            let loadingBar = document.getElementById(barId);
+            let statusText = document.getElementById(statusId);
 
-        function startLoadingBars() {
-            let bars = [];
-            for (let i = 0; i < 5; i++) {
-                bars.push(createLoadingBar());
-            }
-
-            function fillBar(index) {
-                if (index >= bars.length) {
-                    alertMessage.style.display = "block"; // Show final hacked message
-                    return;
+            function updateBar() {
+                if (width < 100) {
+                    width += Math.floor(Math.random() * 10) + 10;
+                    if (width > 100) width = 100;
+                    loadingBar.style.width = width + "%";
+                    statusText.innerText = width + "% Complete";
+                    setTimeout(updateBar, delay);
+                } else {
+                    statusText.innerText = "✅ Done!";
+                    if (nextFunction) setTimeout(nextFunction, 500);
                 }
-
-                let width = 0;
-                let interval = setInterval(() => {
-                    if (width >= 100) {
-                        clearInterval(interval);
-                        bars[index].style.backgroundColor = "red"; // Turn red after full
-                        setTimeout(() => fillBar(index + 1), 500); // Start next bar
-                    } else {
-                        width += 1;
-                        bars[index].style.width = width + "%";
-                    }
-                }, 50);
             }
 
-            fillBar(0);
+            updateBar();
         }
 
-        startHackingEffect();
+        addHackingText();
+
+        fakeLoading("bar1", "status1", 200, function() {
+            document.body.innerHTML += "<h2 class='final-message'>🔥 SYSTEM HACKED! 🔥</h2>";
+        });
     </script>
 
 </body>
