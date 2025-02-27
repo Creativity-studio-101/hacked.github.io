@@ -21,6 +21,7 @@
         }
 
         .text-container {
+            top: 500px; /* Adjusted to overlap */
             width: 100%;
             font-size: 16px;
             white-space: pre-line;
@@ -37,18 +38,17 @@
             position: relative;
         }
 
-        .loading-bar {
-            width: 0%;
-            height: 100%;
-            background-color: lime;
-            transition: width 0.5s;
+        .status {
+            font-size: 14px; 
+            margin-bottom: 5px;
+            color: red;
         }
 
-        .status {
+        .done-status {
+            margin-top: 5px;
             font-size: 14px;
             color: lime;
-            text-align: center;
-        }
+            display: none;
 
     </style>
 </head>
