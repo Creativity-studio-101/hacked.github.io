@@ -3,45 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacking...</title>
+    <title>HACKING...</title>
     <style>
         body {
             background-color: black;
             color: red;
             font-family: 'Courier New', monospace;
-            overflow: hidden;
+            text-align: center;
             padding: 20px;
-        }
-
-        .hacking-screen {
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .text-container {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            font-size: 16px;
-            white-space: pre-line;
-            text-align: left;
-        }
-
-        .green-text {
-            color: lime;
-            position: absolute;
-            left: 5px;
-            top: 0;
-            opacity: 0.8;
         }
 
         .loading-container {
             width: 80%;
             margin: 10px auto;
-            background-color: #333;
-            border: 1px solid lime;
-            height: 10px;
+            background-color: grey;
+            border: 2px solid lime;
+            height: 15px;
             position: relative;
         }
 
@@ -49,105 +26,111 @@
             width: 0%;
             height: 100%;
             background-color: lime;
-            transition: width 0.3s;
+            transition: width 0.5s;
         }
 
         .status {
-            font-size: 12px;
+            font-size: 14px;
+            color: lime;
+            font-weight: bold;
         }
 
-        .final-message {
+        .hacking-text {
+            white-space: pre-line;
+            text-align: left;
+            margin: 20px auto;
+            width: 80%;
             color: red;
-            font-size: 20px;
-            margin-top: 20px;
-            text-align: center;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-
-    <h1 style="color: red; text-align: center;">⚠ HACKING IN PROGRESS..... 💀</h1>
-    <p style="text-align: center; color: lime;">Scanning device vulnerabilities...</p>
-
-    <div class="loading-container">
-        <div class="loading-bar" id="bar1"></div>
-    </div>
-    <p class="status" id="status1">0% Complete</p>
-
-    <div class="hacking-screen">
-        <div class="text-container" id="hackingText"></div>
-    </div>
-
+    <h1 style="color: red; font-size: 24px">⚠ HACKING IN PROGRESS..... 💀</h1>
+    <p style="color: green; font-size: 18px;">Scanning device vulnerabilities...</p>
+    
+    <div id="loading-section"></div>
+    <div class="hacking-text" id="hackingText"></div>
+    
     <script>
+        const tasks = [
+            "Cracking password...",
+            "Extracting personal files...",
+            "Tracking location...",
+            "Accessing front camera...",
+            "Bypassing firewall..."
+        ];
+        
         const hackingMessages = [
             "[Initializing System Breach...]",
             "[Bypassing Firewall...]",
             "[Cracking Password: *********]",
             "[Decrypting Secure Files...]",
             "[Accessing User Data...]",
-            "[Extracting Personal files...]",
             "[Tracking IP Address...]",
             "[Camera Hacked - Live Feed Activated]",
             "[Downloading Confidential Data...]",
             "[Overriding Security Protocols...]",
             "[Fake Bank Transaction Initiated...]"
         ];
+        
+        let loadingSection = document.getElementById("loading-section");
+        let hackingText = document.getElementById("hackingText");
+        let index = 0;
 
-        let textContainer = document.getElementById("hackingText");
-        let textIndex = 0;
+        function addLoadingTask(task) {
+            let container = document.createElement("div");
+            let text = document.createElement("p");
+            let barContainer = document.createElement("div");
+            let bar = document.createElement("div");
+            let status = document.createElement("p");
 
-        function addHackingText() {
-            if (textIndex < hackingMessages.length) {
-                let redText = document.createElement("p");
-                let greenText = document.createElement("p");
+            text.innerText = task;
+            text.style.color = "red";
+            barContainer.className = "loading-container";
+            bar.className = "loading-bar";
+            status.className = "status";
+            status.innerText = "0% Complete";
 
-                redText.textContent = hackingMessages[textIndex];
-                greenText.textContent = hackingMessages[textIndex];
+            barContainer.appendChild(bar);
+            container.appendChild(text);
+            container.appendChild(barContainer);
+            container.appendChild(status);
+            loadingSection.appendChild(container);
 
-                greenText.classList.add("green-text");
-                redText.style.position = "relative";
-
-                textContainer.appendChild(redText);
-                textContainer.appendChild(greenText);
-
-                textIndex++;
-                setTimeout(addHackingText, 500);
-            }
+            let width = 0;
+            let interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    status.innerHTML = "✅ Done!";
+                } else {
+                    width += Math.floor(Math.random() * 15) + 10;
+                    if (width > 100) width = 100;
+                    bar.style.width = width + "%";
+                    status.innerText = width + "% Complete";
+                }
+            }, 600);
         }
 
-        function fakeLoading(barId, statusId, delay, nextFunction) {
-            let width = 0;
-            let loadingBar = document.getElementById(barId);
-            let statusText = document.getElementById(statusId);
-
-            function updateBar() {
-                if (width < 100) {
-                    width += Math.floor(Math.random() * 10) + 10;
-                    if (width > 100) width = 100;
-                    loadingBar.style.width = width + "%";
-                    statusText.innerText = width + "% Complete";
-                    setTimeout(updateBar, delay);
-                } else {
-                    statusText.innerText = "✅ Done!";
-                    if (nextFunction) setTimeout(nextFunction, 500);
+        function addHackingMessages() {
+            let i = 0;
+            function typeMessage() {
+                if (i < hackingMessages.length) {
+                    hackingText.innerHTML += hackingMessages[i] + "<br>";
+                    i++;
+                    setTimeout(typeMessage, 400);
                 }
             }
-
-            updateBar();
+            typeMessage();
+        }
+        
+        function startHacking() {
+            tasks.forEach((task, i) => {
+                setTimeout(() => addLoadingTask(task), i * 2000);
+            });
+            setTimeout(addHackingMessages, 500);
         }
 
-        addHackingText();
-
-        fakeLoading("bar1", "status1", 200, function() {
-            document.body.innerHTML += "<h2 class='final-message'>🔥 SYSTEM HACKED! 🔥</h2>";
-        });
+        startHacking();
     </script>
-
 </body>
 </html>
