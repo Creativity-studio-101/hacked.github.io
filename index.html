@@ -23,7 +23,7 @@
 
         .text-container {
             position: absolute;
-            top: 700px;
+            top: 50px; /* Adjusted to overlap */
             width: 100%;
             font-size: 16px;
             white-space: pre-line;
@@ -34,7 +34,7 @@
 
         .loading-container {
             width: 80%;
-            margin: 20px auto; /* Increased space between bars */
+            margin: 10px auto;
             background-color: grey;
             border: 1px solid lime;
             height: 10px;
@@ -49,23 +49,24 @@
         }
 
         .status {
-            font-size: 10px; 
-            margin-bottom: 5px;
-            color: red;
+            font-size: 14px;
+            color: lime;
+            position: relative;
+            top: -5px; /* Text remains above the bar */
         }
 
         .done-status {
-            margin-top: 5px;
-            font-size: 10px;
+            font-size: 14px;
             color: lime;
-            display: none;
+            display: none; /* Hidden until finished */
         }
+
     </style>
 </head>
 <body>
 
-    <h1 style="color: red; font-size: 24px;">⚠ HACKING IN PROGRESS..... 💀</h1>
-    <p style="color: lime; font-size: 18px;">Scanning device vulnerabilities...</p>
+    <h1 style="color: red; font-size: 20px">⚠ HACKING IN PROGRESS..... 💀</h1>
+    <p style="color: lime;">Scanning device vulnerabilities...</p>
 
     <div id="loading-section"></div>
     <div class="text-container" id="hackingText"></div>
@@ -110,16 +111,16 @@
             let doneText = document.createElement("p");
             doneText.className = "done-status";
             doneText.innerText = "✅ Done!";
+            container.appendChild(doneText);
 
             loadingSection.appendChild(status);
             loadingSection.appendChild(container);
-            loadingSection.appendChild(doneText); // Done appears separately below the bar
 
             let width = 0;
             let interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
-                    doneText.style.display = "block"; // Show "Done!" properly
+                    doneText.style.display = "block"; // Show "Done!" below the bar
                 } else {
                     width += 20;
                     bar.style.width = width + "%";
@@ -141,7 +142,7 @@
                 }
             }
 
-            addLogMessage();
+            addLogMessage(); // Start text logs immediately
         }
 
         startHackingEffect();
