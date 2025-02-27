@@ -24,7 +24,7 @@
             width: 100%;
             font-size: 16px;
             white-space: pre-line;
-            text-align: left; /* Align text to the left */
+            text-align: left;
             margin-top: 20px;
         }
 
@@ -58,7 +58,6 @@
     <p style="color: lime;">Scanning device vulnerabilities...</p>
 
     <div id="loading-section"></div>
-
     <div class="text-container" id="hackingText"></div>
 
     <script>
@@ -70,10 +69,23 @@
             "Downloading confidential data..."
         ];
 
+        const logMessages = [
+            "[Initializing System Breach...]",
+            "[Bypassing Firewall...]",
+            "[Cracking Password: *********]",
+            "[Decrypting Secure Files...]",
+            "[Accessing User Data...]",
+            "[Tracking IP Address...]",
+            "[Camera Hacked - Live Feed Activated]",
+            "[Fake Bank Transaction Initiated...]",
+            "[Government Database Access Granted...]",
+            "[Cloning Security Tokens...]"
+        ];
+
         let loadingSection = document.getElementById("loading-section");
         let textContainer = document.getElementById("hackingText");
 
-        function createLoadingBar(message, index, callback) {
+        function createLoadingBar(message) {
             let container = document.createElement("div");
             container.className = "loading-container";
 
@@ -93,7 +105,6 @@
                 if (width >= 100) {
                     clearInterval(interval);
                     status.innerText = "✅ Done!";
-                    if (callback) setTimeout(callback, 500);
                 } else {
                     width += 20;
                     bar.style.width = width + "%";
@@ -101,40 +112,23 @@
             }, 500);
         }
 
-        function displayHackingMessages(index = 0) {
-            if (index < hackingMessages.length) {
-                createLoadingBar(hackingMessages[index], index, () => displayHackingMessages(index + 1));
-            } else {
-                startScrollingText();
-            }
-        }
+        function startHackingEffect() {
+            hackingMessages.forEach((msg, index) => {
+                setTimeout(() => createLoadingBar(msg), index * 1000);
+            });
 
-        function startScrollingText() {
-            const logMessages = [
-                "[Initializing System Breach...]",
-                "[Bypassing Firewall...]",
-                "[Cracking Password: *********]",
-                "[Decrypting Secure Files...]",
-                "[Accessing User Data...]",
-                "[Tracking IP Address...]",
-                "[Camera Hacked - Live Feed Activated]",
-                "[Fake Bank Transaction Initiated...]",
-                "[Government Database Access Granted...]",
-                "[Cloning Security Tokens...]"
-            ];
-
-            let index = 0;
+            let logIndex = 0;
             function addLogMessage() {
-                if (index < logMessages.length) {
-                    textContainer.innerHTML += logMessages[index] + "<br>";
-                    index++;
+                if (logIndex < logMessages.length) {
+                    textContainer.innerHTML += logMessages[logIndex] + "<br>";
+                    logIndex++;
                     setTimeout(addLogMessage, 500);
                 }
             }
             addLogMessage();
         }
 
-        displayHackingMessages();
+        startHackingEffect();
     </script>
 
 </body>
