@@ -32,10 +32,18 @@
             transform: translateX(-50%);
         }
 
+       body {
+            
+            color: lime;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 1px;
+        }
+
         .loading-container {
             width: 80%;
             margin: 10px auto;
-            background-color: grey;
+            background-color: #333;
             border: 1px solid lime;
             height: 10px;
             position: relative;
@@ -49,17 +57,8 @@
         }
 
         .status {
-            font-size: 14px;
-            color: red;
-            position: relative;
-            top: -5px; /* Text remains above the bar */
-        }
-
-        .done-status {
-            top: -3px;
-            font-size: 14px;
-            color: lime;
-            display: none; /* Hidden until finished */
+            margin-top: 3px;
+            font-size: 10px;
         }
 
     </style>
